@@ -9,5 +9,4 @@ for i in range(1, len(array)):
             array[j], array[j-1] = array[j-1], array[j]         # 자리 바꾸기
         else:
             break
-        
 print(array)
