@@ -46,31 +46,34 @@ class MyselfPriorityQueue:
         return max_item
     
     
-    # 내부 헬퍼 함수
-    def _siftup(self, index):
+    # ===== 내부 헬퍼 함수 =====
+    def _siftup(self, index):           # 새로 삽입된 원소가 부모보다 크면 위로 교환
         parent = (index - 1) // 2
         if index > 0 and self.num3[index] > self.num3[parent]:
-            self._siftup(index, parent)
-            self._siftup(parent)
+            self._swap(index, parent)
+            self._siftup(parent)  # 재귀 호출
+    
     
     def _siftdown(self, index):
         child = 2 * index + 1
         if child >= len(self.num3):
             return
         
-        if child + 1 < len(self.num3) and self.num3[child+1] > self.num3[child]:
+        # 오른쪽 자식이 더 크면 선택
+        if child + 1 < len(self.num3) and self.num3[child + 1] > self.num3[child]:
             child += 1
         if self.num3[child] > self.num3[index]:
             self._swap(child, index)
             self._siftdown(child)
         
+        
     def _swap(self, i, j):
-        self.num3[i], self.num3[j] = self.num3[j] = self.num3[i]
+        self.num3[i], self.num3[j] = self.num3[j], self.num3[i]
+        
         
     def peek(self):
         if self.is_empty():
-            if self.is_empty():
-                return None
+            return None
         return self.num3[0]
 
 
@@ -80,7 +83,6 @@ queue.push(1)
 queue.push(3)
 
 queue.pop()
-
 
 
 
