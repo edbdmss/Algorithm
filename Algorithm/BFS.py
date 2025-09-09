@@ -25,6 +25,5 @@ def bfs(x, y):  # x: x좌표, y: y좌표
             else:
                 continue
     return graph[N-1][M-1]
+
 print(bfs(0, 0))
-
-
