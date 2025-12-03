@@ -6,6 +6,7 @@
 이로써 실제 배열에는 남아있지만 큐 논리상 접근하지 않게된다.
 '''
 
+# 원형 큐
 class CircularQueue:
     def __init__(self, size):
         self.size = size
@@ -36,6 +37,12 @@ class CircularQueue:
         self.front = (self.front + 1) % self.size
         return self.queue[self.front]
     
+    def peek(self):
+        if not self.is_empty():
+            return self.queue[(self.front + 1) % self.size]
+        else:
+            pass
+        
     def display(self):
         if self.is_empty():
             print("Queue is Empty")
@@ -43,9 +50,48 @@ class CircularQueue:
         
         i = (self.front + 1) % self.size
         elements = []       # 큐 내용을 저장할 임시 리스트
+        
         while i != (self.rear + 1) % self.size:
             elements.append(self.queue[i])
             i = (i + 1) % self.size
         print("Queue:", elements)
+    
+    
         
-q = CircularQueue(5) 
+
+
+# 원형 덱
+class CircularDeque(CircularQueue):
+    def __init__(self, size=10):
+        super().__init__(size)
+    
+    def addRear(self, item):
+        self.enqueue(item)
+    
+    def deleteFront(self):
+        return self.dequeue()
+    
+    def getFront(self):
+        return self.peek()
+    
+    def addFront(self, item):
+        if not self.is_full():
+            self.queue[self.front] = item
+            self.front = (self.front - 1 + self.size) % self.size
+        else:
+            pass
+        
+    def deleteRear(self):
+        if not self.is_empty():
+            item = self.queue[self.rear]
+            self.rear = (self.rear -1 + self.size) % self.size
+            return item
+        else:
+            pass
+        
+    def getRear(self):
+        if not self.is_empty():
+            return self.queue[self.rear]
+        else:
+            pass
+        

@@ -3,15 +3,14 @@ import math
 input = sys.stdin.readline
 
 M, N = map(int, input().split())
-num = [j for j in range(M, N+1)]
+num = [True] * (N+1)
+num[0] = num[1] = False
 
-for j in range(N-M+1):
-    r = True
-    for i in range(2, int(math.sqrt(N))+1):
-        if num[j] % i == 0 and num[j] != i :
-            r = False
-            continue
-        if num[j] == 1:
-            r = False
-    if r:
-        print(num[j])
+for i in range(2, int(math.sqrt(N)+1)):
+    if num[i]:
+        for j in range(i*i, N+1, i):
+            num[j] = False
+
+for i in range(M, N+1):
+    if num[i]:
+        print(i) 
